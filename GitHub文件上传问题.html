@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>薛婷予 - 视觉传达设计师</title>
+    <style>
+        /* 基础样式与马卡龙配色 */
+        :root {
+            --pink: #FFD1DC;      /* 淡粉色 */
+            --mint: #B5EAD7;      /* 薄荷绿 */
+            --yellow: #FFEAA7;    /* 淡黄色 */
+            --lavender: #E2D1F9;  /* 淡紫色 */
+            --blue: #A7C7E7;      /* 淡蓝色 */
+            --text-dark: #555;    /* 深色文字 */
+            --text-light: #777;   /* 浅色文字 */
+            --white: #fff;        /* 白色 */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--pink);
+        }
+        
+        .nav-links a.active {
+            color: var(--pink);
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--pink);
+        }
+        
+        /* 页面内容样式 */
+        .page {
+            display: none;
+            padding: 100px 0 50px;
+            min-height: 100vh;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        .page-title {
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-dark);
+        }
+        
+        /* 首页/关于我 */
+        .home {
+            background: linear-gradient(135deg, var(--pink) 0%, var(--lavender) 100%);
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .home-content {
+            max-width: 800px;
+        }
+        
+        .home h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .home p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--mint);
+            color: var(--text-dark);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--yellow);
+            transform: translateY(-3px);
+        }
+        
+        /* 作品集 */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .portfolio-item {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .portfolio-img {
+            height: 200px;
+            background-color: var(--blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 24px;
+        }
+        
+        .portfolio-info {
+            padding: 20px;
+        }
+        
+        .portfolio-info h3 {
+            margin-bottom: 10px;
+        }
+        
+        /* 设计服务 */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .service-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+        
+        /* 联系我 */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-top: 40px;
+        }
+        
+        .contact-info {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .contact-form {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .home h1 {
+                font-size: 36px;
+            }
+            
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">薛婷予</div>
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link active">首页</a></li>
+                    <li><a href="#portfolio" class="nav-link">作品集</a></li>
+                    <li><a href="#services" class="nav-link">设计服务</a></li>
+                    <li><a href="#contact" class="nav-link">联系我</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 首页/关于我 -->
+    <section id="home" class="page active">
+        <div class="home">
+            <div class="container">
+                <div class="home-content">
+                    <h1>薛婷予</h1>
+                    <p>苏州大学视觉传达设计专业学生</p>
+                    <p>专注于品牌设计、UI/UX设计和插画创作</p>
+                    <a href="#portfolio" class="btn">查看作品</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 作品集 -->
+    <section id="portfolio" class="page">
+        <div class="container">
+            <h2 class="page-title">作品集</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-img" style="background-color: var(--pink);">品牌设计</div>
+                    <div class="portfolio-info">
+                        <h3>咖啡品牌视觉设计</h3>
+                        <p>为新兴咖啡品牌设计的完整视觉识别系统</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-img" style="background-color: var(--mint);">UI/UX设计</div>
+                    <div class="portfolio-info">
+                        <h3>健康管理APP设计</h3>
+                        <p>专注于用户体验的健康追踪应用界面设计</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-img" style="background-color: var(--yellow);">插画设计</div>
+                    <div class="portfolio-info">
+                        <h3>城市印象插画系列</h3>
+                        <p>以苏州园林为灵感创作的现代插画作品</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-img" style="background-color: var(--lavender);">包装设计</div>
+                    <div class="portfolio-info">
+                        <h3>有机护肤品包装</h3>
+                        <p>环保理念指导下的可持续包装设计方案</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 设计服务 -->
+    <section id="services" class="page">
+        <div class="container">
+            <h2 class="page-title">设计服务</h2>
+            <div class="services">
+                <div class="service-card">
+                    <div class="service-icon" style="background-color: var(--pink);">🎨</div>
+                    <h3>品牌设计</h3>
+                    <p>Logo设计、VI系统、品牌形象塑造</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon" style="background-color: var(--mint);">📱</div>
+                    <h3>UI/UX设计</h3>
+                    <p>网站、APP界面设计及用户体验优化</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon" style="background-color: var(--yellow);">✏️</div>
+                    <h3>插画设计</h3>
+                    <p>定制插画、角色设计、视觉叙事</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon" style="background-color: var(--lavender);">📦</div>
+                    <h3>包装设计</h3>
+                    <p>产品包装、宣传物料、创意展示</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我 -->
+    <section id="contact" class="page">
+        <div class="container">
+            <h2 class="page-title">联系我</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>联系方式</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon" style="background-color: var(--pink);">📧</div>
+                        <div>
+                            <h4>邮箱</h4>
+                            <p>xty0933@163.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon" style="background-color: var(--mint);">📱</div>
+                        <div>
+                            <h4>电话</h4>
+                            <p>18236990933</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon" style="background-color: var(--yellow);">🏫</div>
+                        <div>
+                            <h4>教育背景</h4>
+                            <p>苏州大学 视觉传达设计专业 2025届</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>发送消息</h3>
+                    <form id="messageForm">
+                        <div class="form-group">
+                            <label for="name">姓名</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">邮箱</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">消息</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">发送消息</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 薛婷予 - 视觉传达设计师</p>
+        </div>
+    </footer>
+
+    <script>
+        // 页面切换功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            
+            // 导航链接点击事件
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 移除所有活动类
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    pages.forEach(page => page.classList.remove('active'));
+                    
+                    // 添加活动类到当前链接和目标页面
+                    this.classList.add('active');
+                    const targetPage = document.querySelector(this.getAttribute('href'));
+                    targetPage.classList.add('active');
+                    
+                    // 平滑滚动到页面顶部
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // 表单提交处理
+            const contactForm = document.getElementById('messageForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('感谢您的留言！我会尽快回复您。');
+                    this.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
